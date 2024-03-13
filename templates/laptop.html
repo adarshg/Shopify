@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+        {% block content %}
+
+        <div class="container text-center">
+            {% for l in laptop %}
+            <div class="card mx-3 my-3" style="width: 18rem; display:inline-block; padding:10px">
+                <img src="{{ l.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ l.name }}</h5>
+                    <p class="card-text">₹ {{ l.price }}</p>
+                    <a href="{% url 'lap_detail' l.id %}" class="btn btn-primary">View Product</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    {% endblock  %}
+
+    <script src="" async defer></script>
+
+    </body>
+</html>

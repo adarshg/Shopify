@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% block content %}
+        
+        <div class="container text-center" style="margin-top:50px; border:1px solid black; padding:50px; width:800px">
+            <h4> Your delivery address </h4>
+            {% for d in details %}
+                <p> 
+                    {{ d.name }}, Mobile: {{ d.mobile }}  <br>
+                    {{ d.housename }}, {{ d.area }}, {{ d.district }}, {{ d.state }}, {{ d.pin }}    
+                </p>
+                {% comment %} user = {{ d.user.id }} {% endcomment %}
+            {% empty %} 
+                <h5> Please fill your address in profile section and make payment </h5>
+            {% endfor %} 
+            <br><br><br>
+            <h4> Order Total: ₹ {{ total }}</h4>
+            <br><br><br>
+            <button id="rzp-button1" type="button" class="btn btn-success"> Make Payment </button>
+
+        </div>
+
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+        <script>
+            var options = {
+                "key": "rzp_test_52BSSNfGxV3ATp", // Enter the Key ID generated from the Dashboard
+                "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Shopify",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response){
+
+                    window.location.href = `http://127.0.0.1:8000/success?order_id=${response.razorpay_order_id}&payment_id=${response.razorpay_payment_id}`    
+
+                    {% comment %} alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature) {% endcomment %}
+                },
+                "prefill": {
+                    {% for d in details %}
+                    "name": "{{ d.name }}",
+                    "email": "{{ d.email }}",
+                    "contact": "+91 {{ d.mobile }}"
+                    {% endfor %}
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+            });
+            document.getElementById('rzp-button1').onclick = function(e){
+                rzp1.open();
+                e.preventDefault();
+            }
+        </script>
+
+        {% endblock %}
+
+    </body>
+</html>

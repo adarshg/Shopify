@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        
+    </head>
+    <body>
+        {% block content %}
+
+        <div class="container text-center" style="margin-top:20px">
+            {% for l in cart %}
+            <div class="card mb-3" style="max-width: 1000px; padding:10px">
+                <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ l.laptop.image.url }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-2" style="margin-top:60px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ l.laptop.name }}</h5>
+                    </div>
+                </div>
+                <div class="col-md-2" style="margin-top:60px">
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-body-primary"><strong>₹ {{ l.laptop.price }}</strong></small></p>
+                    </div>
+                </div>
+                <div class="col-md-2" style="margin-top:70px;" padding:"10px">
+                    <button class="pluscart" pid={{ l.laptop.id }} style="width:30px; height:30px;"> + </button>
+                    <input id={{ l.laptop.id }} type="text" value={{ l.quantity }} style="width:50px; text-align:center" readonly>
+                    <button class="minuscart" pid={{ l.laptop.id }} style="width:30px; height:30px;"> - </button>
+                    <button pid={{ l.laptop.id }} style="margin-top:50px"; type="button" class="btn btn-secondary removecart"> Remove </button>
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+            <br>
+            {% if total > 0 %}
+            <h6> Subtotal: ₹ <input type="text" id="amount" value=  {{ total }} readonly> </h6> 
+            
+            <button onclick="location.href={% url 'order' %}" type="button" class="btn btn-primary" style="margin-left:600px">Proceed to buy</button>
+            {% else %}
+                <h3> Your Cart is empty </h3>
+            {% endif %}
+            <br><br>
+
+        </div>
+
+        {% endblock  %}
+
+      
+   
+    </body> 
+</html>

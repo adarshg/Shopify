@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% comment %} <link rel="stylesheet" href=""> {% endcomment %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static '/css/base.css' %}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    </head>
+    <body style="background-color:#f2f4fc">
+        
+        <script src="" async defer></script>
+
+        <nav class="navbar navbar-expand-lg bg-success text-white">
+            <div class="container-fluid">
+              <a style="color:white" class="navbar-brand" href=""><h4>Shopify</h4></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a style="color:#f2f4fc" class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a style="color:#f2f4fc" class="nav-link active" aria-current="page" href="{% url 'lap' %}">Laptops & Mobiles</a>
+                  </li>
+                  {% if request.user.is_authenticated %}
+                  <li class="nav-item">
+                    <a style="color:#f2f4fc" class="nav-link active" aria-current="page" href="{% url 'profile' %}"> Profile </a>
+                  </li>
+                  <h5 style="margin-left:650px; margin-top:10px"> Welcome, {{ request.user }} </h5>
+                  <li class="nav-item">
+                    <a style="margin-left:30px; color:#f2f4fc" class="nav-link active" aria-current="page" href="{% url 'logout' %}"> Logout </a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a style="color:#f2f4fc" class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
+                  </li>
+                  <li class="nav-item">
+                    <a style="color:#f2f4fc" class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+              {% comment %} <div class="form-inline my-2 my-lg-0"> {% endcomment %}
+                <a href="{% url 'show_cart' %}">
+                  <img id="cart-icon" src="{% static 'images/cart.png' %}"> 
+                </a>
+                <p id="cart-total">{% if totalitem > 0 %} {{ totalitem }} {% else %} {{ 0 }}{% endif %} </p>  
+              {% comment %} </div> {% endcomment %}
+          </nav>
+          
+          {% block content %}
+          {% endblock  %}
+
+          <script src="{% static "/js/updatecart.js" %}"></script>
+
+    </body>
+</html>

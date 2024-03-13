@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% block content %}
+        <div class="container text-center" style="margin-top:30px; border-width:1px; border-color:black; border-style:solid; width :500px; height:480px">
+
+            <h1 style="margin-top:30px"> Create Account </h1><br><br>
+
+            <form method="POST">
+                {% csrf_token %}
+            <h5> <p>   {{ form.username.label }}<p>
+                <p>    {{ form.username }}<p>
+                {{ form.password1.label }}
+                <p>    {{ form.password1 }}<p>
+                {{ form.password2.label }}
+            <p>    {{ form.password2 }}<p>
+                <h5><br>
+                
+                {% comment %} <input type="submit" value="Register"> {% endcomment %}
+                <button type="submit" class="btn btn-warning">Register</button>
+
+            </form>
+        </div>    
+
+        <script src="" async defer></script>
+        {% endblock %}
+    </body>
+</html>
+    

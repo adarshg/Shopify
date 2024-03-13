@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% block content %}
+        <div class="container text-center" style="margin-top:20px; border-width:1px; border-color:black; border-style:solid; width :900px; height:500px">
+            <form method="POST">
+                {% csrf_token %}
+
+                <h1 style="margin-top:10px"> Personal details </h1>
+
+                {% comment %} {{ form.user.label }} {% endcomment %}
+                {{ form.user.as_hidden }}<br><br>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col">
+                            <h5>    {{ form.name.label }}
+                                <p>    {{ form.name }}</p>
+                                        {{ form.email.label }}
+                                        <p>    {{ form.email }}</p>
+                            {{ form.mobile.label }}
+                            <p>{{ form.mobile }}</p>
+                            {{ form.housename.label }}
+                            <p>   {{ form.housename }}</p><br><br>
+                            <h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                            
+                            {{ form.area.label }}
+                            <p>    {{ form.area }}</p>
+                            {{ form.district.label }}
+                            <p>    {{ form.district }}</p>
+                            {{ form.state.label }}
+                            <p>     {{ form.state }}</p>
+                            {{ form.pin.label }}
+                            <p>   {{ form.pin }}</p>
+                        </h5>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning" style="width:100px">Save</button>
+                    {% comment %} <input type="submit" value="Save"> {% endcomment %}
+            </form>
+        </div>
+    </div>
+
+
+        <script src="" async defer></script>
+
+        {% endblock %}
+    </body>
+</html>

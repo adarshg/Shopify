@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <script src="" async defer></script>
+
+        {% block content %}
+        <div class="container text-center" style="margin-top:5%;">
+            <div class="card mb-3 mx-3 my-3" style="max-width: 990px;">
+                <div class="row g-0">
+                <div class="col-md-4" style="padding:1%">
+                    <img src="{{ laptop.image.url }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ laptop.name }}</h5>
+                    <p class="card-text">{{ laptop.descr }}</p>
+                    <p class="card-text"><small class="text-body-primary"><strong> ₹ {{ laptop.price }} </strong></small></p>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="location.href='{% url 'add_to_cart' laptop.id %}'">Add to Cart</button>
+                   
+                    <button type="button" class="btn btn-success" style="margin-left:30px" onclick="location.href='{% url 'buynow' laptop.price %}'">Buy Now</button>
+        
+                </div>
+                </div>                
+            </div>
+        </div>    
+        
+        {% endblock  %}
+
+    </body>
+</html>
