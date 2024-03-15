@@ -12,6 +12,9 @@
     </head>
     <body>
         {% block content %}
+        {% for m in messages %}
+            <p align='center' style="margin-top:10px"> {{ m }} </p>
+        {% endfor %}
         <div class="container text-center" style="margin-top:30px; border-width:1px; border-color:black; border-style:solid; width :500px; height:480px">
 
             <h1 style="margin-top:30px"> Create Account </h1><br><br>

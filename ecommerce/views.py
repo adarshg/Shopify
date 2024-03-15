@@ -175,6 +175,8 @@ def register_user(request):
             form.save()
             messages.success(request, "User registered successfully")
             return redirect('login')
+        else:
+            messages.info(request, form.errors)
     context = {
         'form': form
     }
@@ -198,7 +200,7 @@ def logout_user(request):
 
 def profile_user(request):
     default = {
-        'user': '',
+        'user': request.user,
         'name': '',
         'email': '',
         'mobile': '',
