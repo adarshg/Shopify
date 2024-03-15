@@ -313,9 +313,9 @@ def buynow(request, amt):
     
 def success(request):
         order_id = request.GET.get('order_id')
-        print(order_id)
+        print("oid: ", order_id)
         payment_id = request.GET.get('payment_id')
-        print(payment_id)
+        print("pid: ", payment_id)
 
         try:
             payment = Payment.objects.get(razorpay_order_id=order_id)
